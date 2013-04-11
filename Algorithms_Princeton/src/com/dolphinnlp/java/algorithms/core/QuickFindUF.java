@@ -1,51 +1,31 @@
 package com.dolphinnlp.java.algorithms.core;
+
+import java.io.File;
+import java.util.Scanner;
+
 /**
- * UF.java	
+ * QuickFindUF.java	
  * @author Miao Fan
  * @afflication Department of Computer Science and Technology in Tsinghua University
  * @email fanmiao.cslt.thu@gmail.com
 */
-import java.util.Scanner;
-import java.io.*;
 
-public class UF {
-
+public class QuickFindUF {
+	
 	private int[] id;
-	private int[] sz;
 	private int count;
 	
-	public UF(int N)
+	public QuickFindUF(int N)
 	{
-		if(N < 0) 
-			throw new IllegalArgumentException();
-		count = N;//N个实体的初始化
-		
 		id = new int[N];
-		sz = new int[N];//每个簇的内部数目
-		
+		count = N;
 		for(int i = 0; i < N; i++)
-		{
 			id[i] = i;
-			sz[i] = 1;
-		}
-		
 	}
 	
-	/**
-	 * 找根元素
-	 * @param p
-	 * @return
-	 */
 	public int find(int p)
 	{
-		if(p < 0 || p >= id.length)
-		{
-			throw new IndexOutOfBoundsException();
-		}
-		while(p != id[p])
-			p = id[p];
-		return p;
-		
+		return id[p];
 	}
 	
 	public int count()
@@ -53,36 +33,26 @@ public class UF {
 		return count;
 	}
 	
-	
 	public boolean connected(int p, int q)
 	{
-		return find(p) == find(q);
+		return id[p] == id[q];
 	}
 	
 	public void union(int p, int q)
 	{
-		int i = find(p);
-		int j = find(q);//分别找到他们的根元素id
-		
-		if(i == j)
+		if(connected(p, q))
 			return;
-		
-		if(sz[i] < sz[j])
+		int pid = id[p];
+		for(int i = 0; i < id.length; i++)
 		{
-			id[i] = j;
-			sz[j] += sz[i];
-		}
-		else
-		{
-			id[j] = i;
-			sz[i] += sz[j];
+			if(id[i] == pid)
+				id[i] = id[q];
 		}
 		count --;
 	}
+	
 	/**
-	 * 
-	 * @param args < input files
-	 * @throws Exception
+	 * @param args 输入文件args[0]
 	 */
 	public static void main(String[] args) throws Exception{
 		// TODO Auto-generated method stub
@@ -91,24 +61,25 @@ public class UF {
 			System.err.println("Parameter args[0] must be the path of input file!");
 			return;
 		}
+		
 		Scanner scan = new Scanner(new File(args[0]));
 		
 		int N = scan.nextInt();
-		
-		UF uf = new UF(N);
+		QuickFindUF uf = new QuickFindUF(N);
 		
 		while(scan.hasNext())
 		{
 			int p = scan.nextInt();
 			int q = scan.nextInt();
 			
-			if(!uf.connected(p, q))
-			{
-				uf.union(p, q);
-				System.out.println(p + " union " + q);
-			}
+			if(uf.connected(p, q))
+				continue;
+			uf.union(p, q);
+			System.out.println(p + " " + q);
 		}
+		
 		System.out.println(uf.count() + " components");
+		
 	}
 
 }
