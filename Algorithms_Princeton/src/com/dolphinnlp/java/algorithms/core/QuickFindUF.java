@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 /**
  * QuickFindUF.java	
- * Quick Find Algorithm Implementation.
+ * Quick Find Algorithm for Union Find.
  * @author Miao Fan
  * @afflication Department of Computer Science and Technology in Tsinghua University
  * @email fanmiao.cslt.thu@gmail.com
