@@ -1,25 +1,23 @@
 package com.dolphinnlp.java.algorithms.core;
-
 import java.io.File;
 import java.util.Scanner;
 
 /**
- * QuickFindUF.java	
- * Quick Find Algorithm Implementation.
+ * QuickUnionUF.java	
+ * Quick Union Algorithm Implementation.
  * @author Miao Fan
  * @afflication Department of Computer Science and Technology in Tsinghua University
  * @email fanmiao.cslt.thu@gmail.com
 */
-
-public class QuickFindUF {
+public class QuickUnionUF {
+	
 	private int[] id;
 	private int count;
 	
-	public QuickFindUF(int N)
+	public QuickUnionUF(int N)
 	{
 		id = new int[N];
 		count = N;
-		
 		for(int i = 0; i < N; i++)
 		{
 			id[i] = i;
@@ -31,31 +29,32 @@ public class QuickFindUF {
 		return count;
 	}
 	
-	//The find operation is quick!
+	//This find operation will be slow!
 	public int find(int p)
 	{
-		return id[p];
+		while(p != id[p])
+			p = id[p];
+		return p;
 	}
 	
 	public boolean connected(int p, int q)
 	{
-		return id[p] == id[q];
+		return find(p) == find(q);
 	}
 	
-	//The union operation is quite slow!
+	//The union operation is relatively fast!
 	public void union(int p, int q)
 	{
-		if(connected(p, q))
+		int i = find(p);
+		int j = find(q);
+		
+		if(i == j)
 			return;
-		int pid = id[p];
-		for(int i = 0; i < id.length; i++)
-		{
-			if(id[i] == pid)
-				id[i] = id[q];
-		}
+		id[i] = j; //Set the root of i to j(q)
 		
 		count --;
 	}
+	
 
 	public static void main(String[] args) throws Exception{
 		// TODO Auto-generated method stub
@@ -68,7 +67,7 @@ public class QuickFindUF {
 		Scanner scan = new Scanner(new File(args[0]));
 		
 		int N = scan.nextInt();
-		QuickFindUF uf = new QuickFindUF(N);
+		QuickUnionUF uf = new QuickUnionUF(N);
 			
 		while(scan.hasNext())
 		{
