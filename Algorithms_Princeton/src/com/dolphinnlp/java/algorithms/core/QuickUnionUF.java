@@ -55,7 +55,12 @@ public class QuickUnionUF {
 		count --;
 	}
 	
-
+	/**
+	 * 
+	 * @param args [example: data\\tinyUF.txt]
+	 * @throws Exception
+	 */
+	
 	public static void main(String[] args) throws Exception{
 		// TODO Auto-generated method stub
 		if(args.length == 0)

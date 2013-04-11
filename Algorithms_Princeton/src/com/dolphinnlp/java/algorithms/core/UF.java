@@ -6,6 +6,7 @@ package com.dolphinnlp.java.algorithms.core;
  * @afflication Department of Computer Science and Technology in Tsinghua University
  * @email fanmiao.cslt.thu@gmail.com
 */
+
 import java.util.Scanner;
 import java.io.*;
 
@@ -19,10 +20,10 @@ public class UF {
 	{
 		if(N < 0) 
 			throw new IllegalArgumentException();
-		count = N;//N个实体的初始化
+		count = N;
 		
 		id = new int[N];
-		sz = new int[N];//每个簇的内部数目
+		sz = new int[N];
 		
 		for(int i = 0; i < N; i++)
 		{
@@ -32,11 +33,6 @@ public class UF {
 		
 	}
 	
-	/**
-	 * 找根元素
-	 * @param p
-	 * @return
-	 */
 	public int find(int p)
 	{
 		if(p < 0 || p >= id.length)
@@ -63,7 +59,7 @@ public class UF {
 	public void union(int p, int q)
 	{
 		int i = find(p);
-		int j = find(q);//分别找到他们的根元素id
+		int j = find(q);
 		
 		if(i == j)
 			return;
@@ -80,11 +76,13 @@ public class UF {
 		}
 		count --;
 	}
+	
 	/**
 	 * 
-	 * @param args < input files
+	 * @param args [example: data\\tinyUF.txt]
 	 * @throws Exception
 	 */
+	
 	public static void main(String[] args) throws Exception{
 		// TODO Auto-generated method stub
 		if(args.length == 0)
