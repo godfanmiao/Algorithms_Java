@@ -1,6 +1,7 @@
 package com.dolphinnlp.java.algorithms.core;
 /**
  * UF.java	
+ * Union Find Algorithm Implementation.
  * @author Miao Fan
  * @afflication Department of Computer Science and Technology in Tsinghua University
  * @email fanmiao.cslt.thu@gmail.com

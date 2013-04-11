@@ -5,13 +5,13 @@ import java.util.Scanner;
 
 /**
  * QuickFindUF.java	
+ * Quick Find Algorithm Implementation.
  * @author Miao Fan
  * @afflication Department of Computer Science and Technology in Tsinghua University
  * @email fanmiao.cslt.thu@gmail.com
 */
 
 public class QuickFindUF {
-	
 	private int[] id;
 	private int count;
 	
@@ -19,13 +19,11 @@ public class QuickFindUF {
 	{
 		id = new int[N];
 		count = N;
+		
 		for(int i = 0; i < N; i++)
+		{
 			id[i] = i;
-	}
-	
-	public int find(int p)
-	{
-		return id[p];
+		}
 	}
 	
 	public int count()
@@ -33,11 +31,17 @@ public class QuickFindUF {
 		return count;
 	}
 	
+	public int find(int p)
+	{
+		return id[p];
+	}
+	
 	public boolean connected(int p, int q)
 	{
 		return id[p] == id[q];
 	}
 	
+	//Union p to q
 	public void union(int p, int q)
 	{
 		if(connected(p, q))
@@ -48,12 +52,10 @@ public class QuickFindUF {
 			if(id[i] == pid)
 				id[i] = id[q];
 		}
+		
 		count --;
 	}
-	
-	/**
-	 * @param args 输入文件args[0]
-	 */
+
 	public static void main(String[] args) throws Exception{
 		// TODO Auto-generated method stub
 		if(args.length == 0)
@@ -61,25 +63,27 @@ public class QuickFindUF {
 			System.err.println("Parameter args[0] must be the path of input file!");
 			return;
 		}
-		
+
 		Scanner scan = new Scanner(new File(args[0]));
 		
 		int N = scan.nextInt();
 		QuickFindUF uf = new QuickFindUF(N);
-		
+			
 		while(scan.hasNext())
 		{
 			int p = scan.nextInt();
 			int q = scan.nextInt();
 			
 			if(uf.connected(p, q))
+			{
+				System.out.println(p + " and " + q + " has connected!");
 				continue;
+			}
 			uf.union(p, q);
-			System.out.println(p + " " + q);
+			System.out.println(p + " union " + q);
 		}
 		
 		System.out.println(uf.count() + " components");
-		
 	}
 
 }
