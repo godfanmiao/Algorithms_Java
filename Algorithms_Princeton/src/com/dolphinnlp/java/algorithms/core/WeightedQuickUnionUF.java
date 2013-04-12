@@ -1,28 +1,25 @@
 package com.dolphinnlp.java.algorithms.core;
 
+import java.io.File;
 import java.util.Scanner;
-import java.io.*;
 
 /**
- * UF.java	
- * Union Find Algorithm.
+ * WeightedQuickUnionUF.java	
+ * Weighted Quick Union Algorithm for Union Find.
  * @author Miao Fan
  * @afflication Department of Computer Science and Technology in Tsinghua University
  * @email fanmiao.cslt.thu@gmail.com
 */
 
-public class UF {
-
+public class WeightedQuickUnionUF {
+	
 	private int[] id;
 	private int[] sz;
 	private int count;
 	
-	public UF(int N)
+	public WeightedQuickUnionUF(int N)
 	{
-		if(N < 0) 
-			throw new IllegalArgumentException();
 		count = N;
-		
 		id = new int[N];
 		sz = new int[N];
 		
@@ -31,19 +28,6 @@ public class UF {
 			id[i] = i;
 			sz[i] = 1;
 		}
-		
-	}
-	
-	public int find(int p)
-	{
-		if(p < 0 || p >= id.length)
-		{
-			throw new IndexOutOfBoundsException();
-		}
-		while(p != id[p])
-			p = id[p];
-		return p;
-		
 	}
 	
 	public int count()
@@ -51,6 +35,12 @@ public class UF {
 		return count;
 	}
 	
+	public int find(int p)
+	{
+		while(p != id[p])
+			p = id[p];
+		return p;
+	}
 	
 	public boolean connected(int p, int q)
 	{
@@ -70,11 +60,11 @@ public class UF {
 			id[i] = j;
 			sz[j] += sz[i];
 		}
-		else
-		{
+		else {
 			id[j] = i;
 			sz[i] += sz[j];
 		}
+		
 		count --;
 	}
 	
@@ -91,23 +81,26 @@ public class UF {
 			System.err.println("Parameter args[0] must be the path of input file!");
 			return;
 		}
+
 		Scanner scan = new Scanner(new File(args[0]));
 		
 		int N = scan.nextInt();
-		
-		UF uf = new UF(N);
-		
+		WeightedQuickUnionUF uf = new WeightedQuickUnionUF(N);
+			
 		while(scan.hasNext())
 		{
 			int p = scan.nextInt();
 			int q = scan.nextInt();
 			
-			if(!uf.connected(p, q))
+			if(uf.connected(p, q))
 			{
-				uf.union(p, q);
-				System.out.println(p + " union " + q);
+				System.out.println(p + " and " + q + " has connected!");
+				continue;
 			}
+			uf.union(p, q);
+			System.out.println(p + " union " + q);
 		}
+		
 		System.out.println(uf.count() + " components");
 	}
 

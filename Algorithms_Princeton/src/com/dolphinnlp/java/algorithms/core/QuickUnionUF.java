@@ -1,4 +1,5 @@
 package com.dolphinnlp.java.algorithms.core;
+
 import java.io.File;
 import java.util.Scanner;
 
@@ -9,6 +10,7 @@ import java.util.Scanner;
  * @afflication Department of Computer Science and Technology in Tsinghua University
  * @email fanmiao.cslt.thu@gmail.com
 */
+
 public class QuickUnionUF {
 	
 	private int[] id;
