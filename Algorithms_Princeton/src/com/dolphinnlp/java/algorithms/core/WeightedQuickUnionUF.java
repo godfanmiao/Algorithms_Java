@@ -17,11 +17,12 @@ public class WeightedQuickUnionUF {
 	private int[] sz;
 	private int count;
 	
+	
 	public WeightedQuickUnionUF(int N)
 	{
-		count = N;
 		id = new int[N];
 		sz = new int[N];
+		count = N;
 		
 		for(int i = 0; i < N; i++)
 		{
@@ -39,6 +40,7 @@ public class WeightedQuickUnionUF {
 	{
 		while(p != id[p])
 			p = id[p];
+		
 		return p;
 	}
 	
@@ -51,20 +53,18 @@ public class WeightedQuickUnionUF {
 	{
 		int i = find(p);
 		int j = find(q);
-		
 		if(i == j)
 			return;
-		
-		if(sz[i] < sz[j])
+		if(sz[i] > sz[j])
+		{
+			id[j] = i;
+			sz[i] += sz[j];
+		}
+		else
 		{
 			id[i] = j;
 			sz[j] += sz[i];
 		}
-		else {
-			id[j] = i;
-			sz[i] += sz[j];
-		}
-		
 		count --;
 	}
 	
@@ -74,34 +74,34 @@ public class WeightedQuickUnionUF {
 	 * @throws Exception
 	 */
 	
-	public static void main(String[] args) throws Exception{
-		// TODO Auto-generated method stub
+	public static void main(String[] args) throws Exception
+	{
 		if(args.length == 0)
 		{
 			System.err.println("Parameter args[0] must be the path of input file!");
 			return;
 		}
-
-		Scanner scan = new Scanner(new File(args[0]));
 		
-		int N = scan.nextInt();
+		Scanner scanner = new Scanner(new File(args[0]));
+		
+		int N = scanner.nextInt();
 		WeightedQuickUnionUF uf = new WeightedQuickUnionUF(N);
-			
-		while(scan.hasNext())
+		
+		while(scanner.hasNext())
 		{
-			int p = scan.nextInt();
-			int q = scan.nextInt();
+			int p = scanner.nextInt();
+			int q = scanner.nextInt();
 			
 			if(uf.connected(p, q))
 			{
 				System.out.println(p + " and " + q + " has connected!");
 				continue;
 			}
+			
 			uf.union(p, q);
-			System.out.println(p + " union " + q);
+			System.out.println(p + " union " + q);		
 		}
-		
-		System.out.println(uf.count() + " components");
+		System.out.println(uf.count() + " components");		
 	}
 
 }
