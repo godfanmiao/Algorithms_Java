@@ -12,11 +12,9 @@ import java.util.Scanner;
 */
 
 public class WeightedQuickUnionUF {
-	
 	private int[] id;
 	private int[] sz;
 	private int count;
-	
 	
 	public WeightedQuickUnionUF(int N)
 	{
@@ -36,11 +34,13 @@ public class WeightedQuickUnionUF {
 		return count;
 	}
 	
+	//Find operation will be slow!
 	public int find(int p)
 	{
 		while(p != id[p])
+		{
 			p = id[p];
-		
+		}
 		return p;
 	}
 	
@@ -49,21 +49,22 @@ public class WeightedQuickUnionUF {
 		return find(p) == find(q);
 	}
 	
-	public void union(int p, int q)
-	{
-		int i = find(p);
-		int j = find(q);
-		if(i == j)
+	//Union the small size to the large one!
+	public void union(int p, int q){
+		int pid = find(p);
+		int qid = find(q);
+		
+		if(pid == qid)
 			return;
-		if(sz[i] > sz[j])
+		if(sz[pid] > sz[qid])
 		{
-			id[j] = i;
-			sz[i] += sz[j];
+			id[qid] = pid;
+			sz[pid] += sz[qid];
 		}
 		else
 		{
-			id[i] = j;
-			sz[j] += sz[i];
+			id[pid] = qid;
+			sz[qid] += sz[pid];
 		}
 		count --;
 	}
@@ -85,23 +86,23 @@ public class WeightedQuickUnionUF {
 		Scanner scanner = new Scanner(new File(args[0]));
 		
 		int N = scanner.nextInt();
-		WeightedQuickUnionUF uf = new WeightedQuickUnionUF(N);
+		WeightedQuickUnionUF wquuf = new WeightedQuickUnionUF(N);
 		
 		while(scanner.hasNext())
 		{
 			int p = scanner.nextInt();
 			int q = scanner.nextInt();
 			
-			if(uf.connected(p, q))
+			if(wquuf.connected(p, q))
 			{
 				System.out.println(p + " and " + q + " has connected!");
 				continue;
 			}
 			
-			uf.union(p, q);
+			wquuf.union(p, q);
 			System.out.println(p + " union " + q);		
 		}
-		System.out.println(uf.count() + " components");		
+		System.out.println(wquuf.count() + " components");		
 	}
 
 }

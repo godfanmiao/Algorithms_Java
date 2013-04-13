@@ -21,9 +21,7 @@ public class QuickFindUF {
 		count = N;
 		
 		for(int i = 0; i < N; i++)
-		{
 			id[i] = i;
-		}
 	}
 	
 	public int count()
@@ -31,7 +29,6 @@ public class QuickFindUF {
 		return count;
 	}
 	
-	//The find operation is quick!
 	public int find(int p)
 	{
 		return id[p];
@@ -42,16 +39,20 @@ public class QuickFindUF {
 		return id[p] == id[q];
 	}
 	
-	//The union operation is quite slow!
 	public void union(int p, int q)
 	{
-		if(connected(p, q))
+		
+		if(id[p] == id[q])
 			return;
+		
 		int pid = id[p];
+		
 		for(int i = 0; i < id.length; i++)
 		{
 			if(id[i] == pid)
+			{
 				id[i] = id[q];
+			}
 		}
 		
 		count --;
@@ -62,34 +63,36 @@ public class QuickFindUF {
 	 * @param args [example: data\\tinyUF.txt]
 	 * @throws Exception
 	 */
-	public static void main(String[] args) throws Exception{
+	public static void main(String[] args) throws Exception
+	{
 		// TODO Auto-generated method stub
 		if(args.length == 0)
 		{
 			System.err.println("Parameter args[0] must be the path of input file!");
 			return;
 		}
-
+		
 		Scanner scan = new Scanner(new File(args[0]));
 		
 		int N = scan.nextInt();
-		QuickFindUF uf = new QuickFindUF(N);
+		QuickFindUF qfuf = new QuickFindUF(N);
 			
 		while(scan.hasNext())
 		{
 			int p = scan.nextInt();
 			int q = scan.nextInt();
 			
-			if(uf.connected(p, q))
+			if(qfuf.connected(p, q))
 			{
 				System.out.println(p + " and " + q + " has connected!");
 				continue;
 			}
-			uf.union(p, q);
+			qfuf.union(p, q);
 			System.out.println(p + " union " + q);
 		}
 		
-		System.out.println(uf.count() + " components");
+		System.out.println(qfuf.count() + " components");
 	}
+
 
 }
