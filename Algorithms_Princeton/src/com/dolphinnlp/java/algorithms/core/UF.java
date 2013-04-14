@@ -1,8 +1,8 @@
 package com.dolphinnlp.java.algorithms.core;
 
+import java.io.File;
 import java.util.Scanner;
-import java.io.*;
-
+import com.dolphinnlp.java.algorithms.utils.*;
 /**
  * UF.java	
  * Union Find Algorithm.
@@ -88,27 +88,31 @@ public class UF {
 		// TODO Auto-generated method stub
 		if(args.length == 0)
 		{
-			System.err.println("Parameter args[0] must be the path of input file!");
+			StdOut.println("Parameter args[0] must be the path of input file!");
 			return;
 		}
-		Scanner scan = new Scanner(new File(args[0]));
 		
-		int N = scan.nextInt();
+		In in = new In(new File(args[0]));
+		
+		int N = in.readInt();
 		
 		UF uf = new UF(N);
 		
-		while(scan.hasNext())
+		while(!in.isEmpty())
 		{
-			int p = scan.nextInt();
-			int q = scan.nextInt();
+			int p = in.readInt();
+			int q = in.readInt();
 			
 			if(!uf.connected(p, q))
 			{
 				uf.union(p, q);
-				System.out.println(p + " union " + q);
+				StdOut.println(p + " union " + q);
+			}
+			else {
+				StdOut.println(p + " and " + q + " have connected!");
 			}
 		}
-		System.out.println(uf.count() + " components");
+		StdOut.println(uf.count() + " components");
 	}
 
 }

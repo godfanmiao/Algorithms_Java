@@ -2,7 +2,7 @@ package com.dolphinnlp.java.algorithms.core;
 
 import java.io.File;
 import java.util.Scanner;
-
+import com.dolphinnlp.java.algorithms.utils.*;
 /**
  * QuickFindUF.java	
  * Quick Find Algorithm for Union Find.
@@ -68,30 +68,30 @@ public class QuickFindUF {
 		// TODO Auto-generated method stub
 		if(args.length == 0)
 		{
-			System.err.println("Parameter args[0] must be the path of input file!");
+			StdOut.println("Parameter args[0] must be the path of input file!");
 			return;
 		}
 		
-		Scanner scan = new Scanner(new File(args[0]));
+		In in = new In(new File(args[0]));
 		
-		int N = scan.nextInt();
+		int N = in.readInt();
 		QuickFindUF qfuf = new QuickFindUF(N);
 			
-		while(scan.hasNext())
+		while(!in.isEmpty())
 		{
-			int p = scan.nextInt();
-			int q = scan.nextInt();
+			int p = in.readInt();
+			int q = in.readInt();
 			
 			if(qfuf.connected(p, q))
 			{
-				System.out.println(p + " and " + q + " has connected!");
+				StdOut.println(p + " and " + q + " has connected!");
 				continue;
 			}
 			qfuf.union(p, q);
-			System.out.println(p + " union " + q);
+			StdOut.println(p + " union " + q);
 		}
 		
-		System.out.println(qfuf.count() + " components");
+		StdOut.println(qfuf.count() + " components");
 	}
 
 

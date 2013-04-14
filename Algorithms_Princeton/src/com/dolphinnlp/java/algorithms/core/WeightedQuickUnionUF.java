@@ -3,6 +3,9 @@ package com.dolphinnlp.java.algorithms.core;
 import java.io.File;
 import java.util.Scanner;
 
+import com.dolphinnlp.java.algorithms.utils.In;
+import com.dolphinnlp.java.algorithms.utils.StdOut;
+
 /**
  * WeightedQuickUnionUF.java	
  * Weighted Quick Union Algorithm for Union Find.
@@ -79,30 +82,30 @@ public class WeightedQuickUnionUF {
 	{
 		if(args.length == 0)
 		{
-			System.err.println("Parameter args[0] must be the path of input file!");
+			StdOut.println("Parameter args[0] must be the path of input file!");
 			return;
 		}
 		
-		Scanner scanner = new Scanner(new File(args[0]));
+		In in = new In(new File(args[0]));
 		
-		int N = scanner.nextInt();
+		int N = in.readInt();
 		WeightedQuickUnionUF wquuf = new WeightedQuickUnionUF(N);
 		
-		while(scanner.hasNext())
+		while(!in.isEmpty())
 		{
-			int p = scanner.nextInt();
-			int q = scanner.nextInt();
+			int p = in.readInt();
+			int q = in.readInt();
 			
 			if(wquuf.connected(p, q))
 			{
-				System.out.println(p + " and " + q + " has connected!");
+				StdOut.println(p + " and " + q + " has connected!");
 				continue;
 			}
 			
 			wquuf.union(p, q);
-			System.out.println(p + " union " + q);		
+			StdOut.println(p + " union " + q);		
 		}
-		System.out.println(wquuf.count() + " components");		
+		StdOut.println(wquuf.count() + " components");		
 	}
 
 }
