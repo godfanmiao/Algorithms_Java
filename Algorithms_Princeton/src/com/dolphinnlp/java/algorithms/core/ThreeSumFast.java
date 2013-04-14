@@ -1,36 +1,58 @@
 package com.dolphinnlp.java.algorithms.core;
 
+import java.util.Arrays;
+
 import com.dolphinnlp.java.algorithms.utils.In;
 import com.dolphinnlp.java.algorithms.utils.StdOut;
 import com.dolphinnlp.java.algorithms.utils.Stopwatch;
 
+import sun.tools.jar.resources.jar;
+
 /**
- * ThreeSum.java	
- * Three sum Algorithm.
+ * ThreeSumFast.java	
+ * Three sum fast Algorithm.
  * @author Miao Fan
  * @afflication Department of Computer Science and Technology in Tsinghua University
  * @email fanmiao.cslt.thu@gmail.com
 */
 
-public class ThreeSum {
-
-	public static int count(int[] a)
+public class ThreeSumFast {
+	public static void printAll(int[] a)
 	{
-		int count = 0;
 		int N = a.length;
+		
+		Arrays.sort(a);
 		
 		for(int i = 0; i < N; i++)
 		{
 			for(int j = i + 1; j < N; j++)
 			{
-				for(int k = j + 1; k < N; k++)
-					//Count the num of sequence that the sum of three number is 0.
-					if(a[i] + a[j] + a[k] == 0)
-						count ++;
+				int k = Arrays.binarySearch(a, -(a[i] + a[j]));
+				
+				if(k > j)
+					StdOut.println(a[i] + " " + a[j] + " " + a[k]);
 			}
 		}
+	}
+	
+	public static int count(int[] a)
+	{
+		int N = a.length;
+		Arrays.sort(a);
 		
-		return count;
+		int cnt = 0;
+		
+		for(int i = 0; i < N; i++)
+		{
+			for(int j = i + 1; j < N; j++)
+			{
+				int k = Arrays.binarySearch(a, -(a[i] + a[j]));
+				
+				if(k > j)
+					cnt ++;
+			}
+		}
+		return cnt;
 	}
 	
 	/**
@@ -39,15 +61,12 @@ public class ThreeSum {
 	 * @throws Exception
 	 */	
 	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	public static void main(String[] args)
+	{
 		int[] a = In.readInts(args[0]);
-		
 		Stopwatch stopwatch = new Stopwatch();
-		
-		StdOut.println(count(a));
-		
+		int cnt = count(a);
+		StdOut.println(cnt);
 		StdOut.println(args[0] + " costs " + stopwatch.elapsedTime() + " seconds");
 	}
-
 }
