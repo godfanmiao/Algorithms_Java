@@ -74,7 +74,7 @@ public class WeightedQuickUnionUF {
 	
 	/**
 	 * 
-	 * @param args [example: data\\tinyUF.txt]
+	 * @param args [example: dataset\\tinyUF.txt]
 	 * @throws Exception
 	 */
 	

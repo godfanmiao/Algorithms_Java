@@ -3,6 +3,7 @@ package com.dolphinnlp.java.algorithms.core;
 import java.io.File;
 import java.util.Scanner;
 import com.dolphinnlp.java.algorithms.utils.*;
+
 /**
  * UF.java	
  * Union Find Algorithm.
@@ -80,7 +81,7 @@ public class UF {
 	
 	/**
 	 * 
-	 * @param args [example: data\\tinyUF.txt]
+	 * @param args [example: dataset\\tinyUF.txt]
 	 * @throws Exception
 	 */
 	

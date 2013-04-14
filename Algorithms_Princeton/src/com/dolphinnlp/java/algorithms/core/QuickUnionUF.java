@@ -57,7 +57,7 @@ public class QuickUnionUF {
 	
 	/**
 	 * 
-	 * @param args [example: data\\tinyUF.txt]
+	 * @param args [example: dataset\\tinyUF.txt]
 	 * @throws Exception
 	 */
 	

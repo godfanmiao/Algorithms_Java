@@ -60,7 +60,7 @@ public class QuickFindUF {
 	
 	/**
 	 * 
-	 * @param args [example: data\\tinyUF.txt]
+	 * @param args [example: dataset\\tinyUF.txt]
 	 * @throws Exception
 	 */
 	public static void main(String[] args) throws Exception
