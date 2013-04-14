@@ -6,8 +6,6 @@ import com.dolphinnlp.java.algorithms.utils.In;
 import com.dolphinnlp.java.algorithms.utils.StdOut;
 import com.dolphinnlp.java.algorithms.utils.Stopwatch;
 
-import sun.tools.jar.resources.jar;
-
 /**
  * ThreeSumFast.java	
  * Three sum fast Algorithm.
@@ -67,6 +65,7 @@ public class ThreeSumFast {
 		Stopwatch stopwatch = new Stopwatch();
 		int cnt = count(a);
 		StdOut.println(cnt);
+		//ThreeSumFast is much faster then Brute-force ThreeSum
 		StdOut.println(args[0] + " costs " + stopwatch.elapsedTime() + " seconds");
 	}
 }

@@ -6,7 +6,7 @@ import com.dolphinnlp.java.algorithms.utils.Stopwatch;
 
 /**
  * ThreeSum.java	
- * Three sum Algorithm.
+ * Brute-force Three sum Algorithm.
  * @author Miao Fan
  * @afflication Department of Computer Science and Technology in Tsinghua University
  * @email fanmiao.cslt.thu@gmail.com
