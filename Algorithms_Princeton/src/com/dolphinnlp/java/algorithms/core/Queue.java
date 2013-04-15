@@ -15,12 +15,11 @@ public class Queue<Item> implements Iterable<Item>{
 		private Node next;
 	}
 	
-	public Queue<Item>()
+	public Queue()
 	{
 		first = null;
 		last = null;
 		N = 0;
-		assert check();
 	}
 	
 	public boolean isEmpty()
@@ -51,7 +50,6 @@ public class Queue<Item> implements Iterable<Item>{
 		else
 			oldlast.next = last;
 		N ++;
-		assert check();
 	}
 	
 	public Item dequeue()
@@ -63,7 +61,6 @@ public class Queue<Item> implements Iterable<Item>{
 		N--;
 		if(isEmpty())
 			last = null;
-		assert check();
 		return item;
 	}
 	
@@ -82,6 +79,12 @@ public class Queue<Item> implements Iterable<Item>{
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Iterator<Item> iterator() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
