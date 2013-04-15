@@ -8,20 +8,29 @@ import com.dolphinnlp.java.algorithms.utils.StdOut;
 
 import sun.tools.jar.resources.jar;
 
+/**
+ * Insertion.java	
+ * Insertion sorting algorithm.
+ * @author Miao Fan
+ * @afflication Department of Computer Science and Technology in Tsinghua University
+ * @email fanmiao.cslt.thu@gmail.com
+*/
+
 public class Insertion {
+	
 	public static void sort(Comparable[] a)
 	{
 		int N = a.length;
 		for(int i = 0; i < N; i++)
 		{
-			for(int j = i; j > 0 && less(a[j], a[j - 1]) ; j--)
+			for(int j = i; j > 0 && less(a[j], a[j - 1]); j--)
 			{
 				exch(a, j, j - 1);
 			}
 		}
 	}
 	
-	public void sort(Object[] a, Comparator c)
+	public static void sort(Object[] a, Comparator c)
 	{
 		int N = a.length;
 		
@@ -87,6 +96,11 @@ public class Insertion {
 			StdOut.println(a[i]);
 		}
 	}
+	
+	/**
+	 * 
+	 * @param args [dataset\\words3.txt]
+	 */
 	
 	public static void main(String[] args)
 	{

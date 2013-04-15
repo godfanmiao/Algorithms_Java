@@ -2,30 +2,34 @@ package com.dolphinnlp.java.algorithms.core;
 
 import java.io.File;
 import java.util.Comparator;
-
 import com.dolphinnlp.java.algorithms.utils.In;
 import com.dolphinnlp.java.algorithms.utils.StdOut;
 
-public class Selection {
+/**
+ * Selection.java	
+ * Selection sorting algorithm.
+ * @author Miao Fan
+ * @afflication Department of Computer Science and Technology in Tsinghua University
+ * @email fanmiao.cslt.thu@gmail.com
+*/
 
-	/**
-	 * @param args
-	 */
+public class Selection {
 	public static void sort(Comparable[] a)
 	{
 		int N = a.length;
+		
 		for(int i = 0; i < N; i++)
 		{
 			int min = i;
+			
 			for(int j = i + 1; j < N; j++)
 			{
 				if(less(a[j], a[min]))
 					min = j;
 			}
+			
 			exch(a, i, min);
-			assert isSorted(a, 0, i);
 		}
-		assert isSorted(a);
 	}
 	
 	public static void sort(Object[] a, Comparator c)
@@ -40,9 +44,7 @@ public class Selection {
 					min = j;
 			}
 			exch(a, i, min);
-			assert isSorted(a, c, 0, i);
 		}
-		assert isSorted(a, c);
 	}
 	
 	private static boolean less(Comparable v, Comparable w)
@@ -55,52 +57,20 @@ public class Selection {
 		return (c.compare(v, w) < 0);
 	}
 	
-	private static void exch (Object[] a, int i, int j)
+	public static void exch(Object[] a, int i, int j)
 	{
 		Object swap = a[i];
 		a[i] = a[j];
 		a[j] = swap;
 	}
 	
-	private static boolean isSorted(Comparable[] a)
-	{
-		return isSorted(a, 0, a.length - 1);
-	}
-	
-	private static boolean isSorted(Comparable[] a, int lo, int hi)
-	{
-		for(int i = lo + 1; i <= hi; i++)
-		{
-			if(less(a[i], a[i - 1]))
-				return false;
-		}
-		return true;
-	}
-	
-	private static boolean isSorted(Object[] a, Comparator c)
-	{
-		return isSorted(a, c, 0, a.length - 1);
-	}
-	
-	private static boolean isSorted(Object[] a, Comparator c, int lo, int hi)
-	{
-		for(int i = lo + 1; i <= hi; i++)
-		{
-			if(less(c, a[i], a[i - 1]))
-				return false;
-		}
-		
-		return true;
-	}
-	
-	private static void show(Comparable[] a)
+	public static void show(Comparable[] a)
 	{
 		for(int i = 0; i < a.length; i++)
 		{
 			StdOut.println(a[i]);
 		}
 	}
-	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		String[] a = In.readStrings(args[0]);
