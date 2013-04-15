@@ -1,6 +1,5 @@
 package com.dolphinnlp.java.algorithms.core;
 
-import java.awt.Checkbox;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
