@@ -1,25 +1,21 @@
 package com.dolphinnlp.java.algorithms.core;
 
-import java.io.File;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
-import com.dolphinnlp.java.algorithms.utils.In;
 import com.dolphinnlp.java.algorithms.utils.StdIn;
 import com.dolphinnlp.java.algorithms.utils.StdOut;
 
-public class Stack<Item> implements Iterable<Item> {
+public class Bag<Item> implements Iterable<Item> {
+	private int N;
+	private Node first;
 	
-	private int N;//size of the stack
-	private Node first;//top of stack
-	
-	private class Node //Inner class
+	private class Node
 	{
 		private Item item;
 		private Node next;
 	}
 	
-	public Stack()
+	public Bag()
 	{
 		first = null;
 		N = 0;
@@ -36,7 +32,7 @@ public class Stack<Item> implements Iterable<Item> {
 		return N;
 	}
 	
-	public void push(Item item)
+	public void add(Item item)
 	{
 		Node oldfirst = first;
 		first = new Node();
@@ -44,32 +40,6 @@ public class Stack<Item> implements Iterable<Item> {
 		first.next = oldfirst;
 		N++;
 		assert check();
-	}
-	
-	public Item pop()
-	{
-		if(isEmpty())
-			throw new NoSuchElementException("Stack underflow");
-		Item item = first.item;
-		first = first.next;
-		N--;
-		assert check();
-		return item;
-	}
-	
-	public Item peek()
-	{
-		if(isEmpty())
-			throw new NoSuchElementException("Stack underflow");
-		return first.item;
-	}
-	
-	public String toString()
-	{
-		StringBuilder s = new StringBuilder();
-		for(Item item : this)
-			s.append(item + " ");
-		return s.toString();
 	}
 	
 	private boolean check()
@@ -96,10 +66,28 @@ public class Stack<Item> implements Iterable<Item> {
 		{
 			numberOfNodes ++;
 		}
-		
 		if(numberOfNodes != N)
 			return false;
+		
 		return true;
+	}
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Bag<String> bag = new Bag<String>();
+		while(!StdIn.isEmpty())
+		{
+			String item = StdIn.readString();
+			bag.add(item);
+		}
+		
+		StdOut.println("size of bag = " + bag.size());
+		for(String s: bag)
+		{
+			StdOut.println(s);
+		}
 	}
 
 	@Override
@@ -111,17 +99,16 @@ public class Stack<Item> implements Iterable<Item> {
 	private class ListIterator implements Iterator<Item>
 	{
 		private Node current = first;
-		@Override
-		public boolean hasNext() {
-			// TODO Auto-generated method stub
+		
+		public boolean hasNext()
+		{
 			return current != null;
 		}
 
 		@Override
 		public Item next() {
 			// TODO Auto-generated method stub
-			if(!hasNext())
-				throw new NoSuchElementException();
+			if(!hasNext()) throw new NoSuchElementException();
 			Item item = current.item;
 			current = current.next;
 			return item;
@@ -130,28 +117,9 @@ public class Stack<Item> implements Iterable<Item> {
 		@Override
 		public void remove() {
 			// TODO Auto-generated method stub
-			
+			throw new UnsupportedOperationException();
 		}
-		
 	}
 	
-	public static void main(String[] args)
-	{
-		Stack<String> s = new Stack<String>();
-		In in = new In(new File(args[0]));
-		while(!in.isEmpty())
-		{
-			String item = in.readString();
-			
-			if(!item.equals("-"))
-				s.push(item);
-			else if(!s.isEmpty())
-				StdOut.print(s.pop() + " ");
-		}
-		
-		StdOut.println("(" + s.size() + " left on stack)");
-		StdOut.println(s.toString());
-	}
-	
-	
+
 }
