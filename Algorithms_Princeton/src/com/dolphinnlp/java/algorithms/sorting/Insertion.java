@@ -2,6 +2,8 @@ package com.dolphinnlp.java.algorithms.sorting;
 
 import java.util.Comparator;
 
+import com.dolphinnlp.java.algorithms.utils.In;
+import com.dolphinnlp.java.algorithms.utils.StdIn;
 import com.dolphinnlp.java.algorithms.utils.StdOut;
 
 public class Insertion {
@@ -57,5 +59,11 @@ public class Insertion {
 			StdOut.println(a[i]);
 		}
 	}
-
+	
+	public static void main(String[] args)
+	{
+		String[] a = In.readStrings("dataset\\tiny.txt");
+		Insertion.sort(a);
+		show(a);
+	}
 }
